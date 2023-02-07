@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import cmd
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     intro = 'Welcome to the AirBNB clone console. Type help or ? to list commands.\n'
@@ -24,6 +25,13 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         "An entered empty line doesn't execute anything"
         pass
+
+    def do_create(self, args):
+        """Create new instance of Base Model"""
+        model = BaseModel()
+        model.save()
+        print(f"{model.id} created")
+
 
 if __name__ - '__main__':
     HBNBCommand().cmdloop()

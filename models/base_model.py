@@ -9,4 +9,5 @@ AirBnB clone project
 class BaseModel:
     ''' THe BaseModel class defined here'''
 
-    def __init__(self, id)
+    def __init__(self, id):
+        ''' Constructor method '''

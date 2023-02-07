@@ -10,8 +10,8 @@ from os import path
 class FileStorage:
     ''' Class declaration '''
 
-    def __init__(self, filepath):
-        self.__file_path = filepath
+    def __init__(self):
+        self.__file_path = "file.json"
         self.__objects = {}
 
     def all(self):

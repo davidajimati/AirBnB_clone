@@ -2,6 +2,7 @@
 
 import cmd
 from models.base_model import BaseModel
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     intro = 'Welcome to the AirBNB clone console. Type help or ? to list commands.\n'
@@ -28,9 +29,33 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """Create new instance of Base Model"""
-        model = BaseModel()
-        model.save()
-        print(f"{model.id} created")
+        if not args:
+            print("** class name missing **")
+            return
+
+        class_name = args.strip():
+        try:
+            model = eval(class_name + "()")
+            storage.save()
+            print(f"{model.id} created")
+
+        except NameError:
+            print("** class doesn't exist **")
+
+    def do_show(self, args):
+        """Usage: show <class name> <instance id>
+        Display the string representation of a class instance of a given id"""
+        
+        arg1 = arg.split()
+        if len(arg1) == 0:
+            print("** class name missing **")
+
+        elif arg1[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **)
+
+        elif 
+
+        try:
 
 
 if __name__ - '__main__':

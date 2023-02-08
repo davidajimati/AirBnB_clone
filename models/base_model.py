@@ -7,6 +7,7 @@ This module contains the Parent class for the AirBnB clone Project
 # Import relevant modules
 import uuid
 from datetime import datetime
+from models.__init__ import storage
 
 
 class BaseModel:
@@ -19,6 +20,10 @@ class BaseModel:
         with them.
         '''
         DATE_FORMAT = "%Y-%m-%dT%H:%M:%S.%f"
+        # check if storage instance is not present in kwargs, create it
+        if "storage" not in kwargs:
+            storage.new(self)
+
         if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key != "__class__":
@@ -42,6 +47,7 @@ class BaseModel:
     def save(self):
         ''' When triggered, updates the updated_at attribute '''
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         ''' Serializing the dictionary of the attributes of instances '''

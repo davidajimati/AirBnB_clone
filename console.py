@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
     Prints all string representation of all instances based or not on <class name>
     """
     
-        arg1.args.split()
+        arg1 = args.split()
         if len(arg1) == 0
             objects = storage.all()
             for obj in objects.values():
@@ -116,7 +116,6 @@ class HBNBCommand(cmd.Cmd):
     """
 
         arg1 = arg.split()
-        obj_id = arg1[1]
         obj_dict = storage.all()
         
 
@@ -128,28 +127,27 @@ class HBNBCommand(cmd.Cmd):
         if class_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
-        if len(arg1) == 1:
+        elif len(arg1) == 1:
             print("** instance id missing **")
             return
 
-        obj = obj_dict.get(class_name + "." + obj_id)
-        if obj is None:
-            print("** no instance found **")
-            return
-        if len(arg1) < 3:
-            print("** attribute name missing **")
-            return
-        attr_value = args[2]
-        if len(arg1) < 4:
-            print("** value missing")
-
-        if len(arg1) == 4:
-        obj = obj_dict.get(class_name + "." + obj_id]
-
-
-
-
-
+        else:
+            obj = obj_dict.get(class_name + "." + obj_id)
+            for key, val in obj_dict.items():
+                obj_name = val.__class__.__name__
+                obj_id = val.id
+                if obj_name == arg1[0] and obj_id == arg1[1].strip('"'):
+                    if len(arg1) == 2:
+                        print("** attribute name missing **")
+                    elif len(arg1) == 3:
+                        print("** value missing **")
+                    else:
+                        setattr(val, arg1[2], and arg1[3])
+                        storage.save()
+                    return
+        
+        print("** no instance found **")
+        
 
 if __name__ - '__main__':
     HBNBCommand().cmdloop()

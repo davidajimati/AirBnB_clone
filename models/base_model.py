@@ -22,7 +22,7 @@ class BaseModel:
         DATE_FORMAT = "%Y-%m-%dT%H:%M:%S.%f"
         # check if storage instance is not present in kwargs, create it
         if "storage" not in kwargs:
-            storage.new()
+            storage.new(self)
 
         if len(kwargs) != 0:
             for key, value in kwargs.items():

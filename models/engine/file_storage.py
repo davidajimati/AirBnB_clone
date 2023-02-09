@@ -4,11 +4,13 @@ Storage engine: Manages Serialization and Deserialization
 Saves Python Dict to JSON and converts it back
 '''
 import json
-from os import path
+from models.base_model import BaseModel
 
 
 class FileStorage:
-    ''' Class declaration '''
+    '''
+    Class for file storage
+    '''
 
     __file_path = "file.json"
     __objects = {}
@@ -20,12 +22,18 @@ class FileStorage:
     def new(self, obj):
         ''' creates a new instance '''
         self.__objects["{}.id".format(obj.__class__.__name__)] = obj
-        obj.to_dict()
 
     def save(self):
-        ''' saves an objects into a JSON file '''
+        '''
+        saves __objects to the JSON file "file.json"
+        '''
         with open(self.__file_path, 'w+') as file:
-            json.dump({k: v.to_dict() for k, v in self.__objects.items()}, file)
+            new_dict = {}
+            for key, value in self.__objects.items():
+                new_dict[key] = value
+            json.dumps(new_dict)
+            # json.dump({k: v.to_dict()
+            #           for k, v in self.__objects.items()}, file)
 
     def reload(self):
         ''' reloads objects from a JSON file '''

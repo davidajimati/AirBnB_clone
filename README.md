@@ -9,7 +9,7 @@ This project is a simple web application similar to AirBnB. It is complete web a
 
 ## Project Workflow
 
-A breakdown of the worflow of the project.
+A breakdown of the workflow of the project.
 
 ### 1. Console
 	i. Create data model
@@ -19,7 +19,7 @@ A breakdown of the worflow of the project.
 ### 2. Web static
 	i. Create HTML of application
 	ii. Create template of each object
-	
+
 ### 3. MySQL storage
 	i. Replace file storage with database storage
 	ii. Map models to a table in database using an O.R.M
@@ -119,4 +119,4 @@ Quit command to exit the program
 ## Authors
 
 * David Ajimati
-* Francis Kwafe 
+* Francis Kwafe

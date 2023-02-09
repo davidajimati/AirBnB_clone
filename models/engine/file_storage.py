@@ -29,21 +29,9 @@ class FileStorage:
         and keeps a separate record of every instance
         '''
 
-        try:
-            with open(self.__file_path, 'x') as file:
-                json.dump({k: v.to_dict()
-                           for k, v in self.__objects.items()}, file)
-
-        except FileExistsError:
-            with open(self.__file_path, 'r') as file:
-                existing_cont = json.load(file)
-
-                data = {k: v.to_dict()
-                        for k, v in self.__objects.items()}
-
-            with open(self.__file_path, 'w') as fi:
-                fi.write('\n')
-                fi.write(json.dump(data, fi))
+        with open(self.__file_path, 'w') as file:
+            json.dump({k: v.to_dict()
+                       for k, v in self.__objects.items()}, file)
 
     def reload(self):
         ''' reloads objects from a JSON file '''

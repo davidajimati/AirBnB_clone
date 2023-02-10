@@ -13,9 +13,10 @@
     an empty line + ENTER doesn't execute anything
     Not be executed when imported
 """
+import traceback
 import cmd
-import sys
-from models.engine import file_storage
+from sys import argv
+# from models.engine import file_storage
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -45,16 +46,22 @@ class HBNBCommand(cmd.Cmd):
         """An entered empty line doesn't execute anything"""
         print("", end="")
 
-    def do_create(self, line):
+    def do_create(self, args):
+        '''Creates a new class instance, taking commands from the CLI'''
         args = args.split()
         if len(args) != 1:
             print("** class name missing **")
-
-        try:
-            eval("create")
         else:
-            pass
+            try:
+                latest = eval("{}()".format(args[0]))
+                storage.save()
+                print(latest.id)
+
+            except Exception as e:
+                print("** class doesn't exist **")
+
     def do_show(self, line):
+        pass
 
 
 if __name__ == "__main__":

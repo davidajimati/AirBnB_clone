@@ -35,7 +35,6 @@ class FileStorage:
 
     def reload(self):
         ''' reloads objects from a JSON file '''
-
         if path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
                 new_dict = json.load(f)

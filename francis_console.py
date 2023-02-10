@@ -57,14 +57,14 @@ class HBNBCommand(cmd.Cmd):
         Display the string representation of a class instance of a given id
         """
 
-        arg1 = arg.split()
+        arg1 = args.split()
         if len(arg1) == 0:
             print("** class name missing **")
 
-        elif arg1[0] not in HBNBCommand.__classes:
+        elif args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
 
-        elif len(arg1) == 1:
+        elif len(args) == 1:
             print("** instance id missing **")
 
         else:
@@ -91,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
             print(" ** instance id missing **")
 
         else:
-            key = arg1[0] + "." + arg[1]
+            key = arg1[0] + "." + args[1]
             if key in storage.all():
                 del storage.all()[key]
                 storage.save()
@@ -122,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         Update instance based on class name and id by adding or updating attribute (save change into the JSON file)
         """
 
-        arg1 = arg.split()
+        arg1 = args.split()
         obj_dict = storage.all()
 
         if len(arg1) == 0:

@@ -56,11 +56,20 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
                 print(latest.id)
 
-            except Exception as e:
+            except Exception:
                 print("** class doesn't exist **")
 
-    def do_show(self, line):
-        pass
+    def do_show(self, args):
+        args = args.split()
+        if len(args) != 1:
+            print("** class name missing **")
+        else:
+            try:
+                latest = eval("{}()".format(args[0]))
+                storage.save()
+                print(latest.id)
+            except Exception:
+                print("** class doesn't exist **")
 
 
 if __name__ == "__main__":

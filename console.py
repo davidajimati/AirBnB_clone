@@ -65,11 +65,6 @@ class HBNBCommand(cmd.Cmd):
         """ Returns the string representation an instance """
 
         args = args.split()
-
-        if args[0] not in HBNBCommand.all_classes:
-            print("** class doesn't exist **")
-            return
-
         if len(args) < 1:
             print("** class name missing **")
 
@@ -80,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         else:
-            data = storage.all().get("{}.{}" .format(args[0], args[1]))
+            data = storage.all().get("{}.{}" .format(args[0]))[args[1]]
             if data is None:
                 print("** no instance found **")
             else:

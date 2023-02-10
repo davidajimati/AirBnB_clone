@@ -1,10 +1,8 @@
 {
     "BaseModel.id": {
         "__class__": "BaseModel",
-        "id": "c29f3b2f-cd66-4ded-b7db-cfefb67c2821",
-        "created_at": "2023-02-10T18:20:42.133082",
-        "updated_at": "2023-02-10T18:20:42.133117",
-        "name": "My_First_Model",
-        "my_number": 89
+        "id": "25702deb-9131-4b59-9919-75ace0d2a7e9",
+        "created_at": "2023-02-10T21:36:53.435745",
+        "updated_at": "2023-02-10T21:36:53.435768"
     }
 }

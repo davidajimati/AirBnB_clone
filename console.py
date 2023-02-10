@@ -16,7 +16,6 @@
 import traceback
 import cmd
 from sys import argv
-# from models.engine import file_storage
 from models.base_model import BaseModel
 from models import storage
 from models.user import User

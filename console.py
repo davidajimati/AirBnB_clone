@@ -14,6 +14,16 @@
     Not be executed when imported
 """
 import cmd
+import sys
+from models.engine import file_storage
+from models.base_model import BaseModel
+from models import storage
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -25,16 +35,26 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, line):
         '''Quit command to exit the program
         '''
-        print("Exiting.")
         return True
 
     def do_EOF(self, line):
         '''Quit command to exit the program'''
-        print("Exiting.")
         return True
 
     def emptyline(self):
+        """An entered empty line doesn't execute anything"""
         print("", end="")
+
+    def do_create(self, line):
+        args = args.split()
+        if len(args) != 1:
+            print("** class name missing **")
+
+        try:
+            eval("create")
+        else:
+            pass
+    def do_show(self, line):
 
 
 if __name__ == "__main__":

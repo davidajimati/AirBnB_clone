@@ -31,7 +31,8 @@ class HBNBCommand(cmd.Cmd):
     Class definition for the command line processor
     """
     prompt = '(hbnb) '
-    all_classes = ['BaseModel', 'User', 'State', 'Review', 'Place', 'City', 'Amenity']
+    all_classes = ['BaseModel', 'User', 'State',
+                   'Review', 'Place', 'City', 'Amenity']
 
     def do_quit(self, line):
         '''Quit command to exit the program
@@ -110,19 +111,18 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         args = args.split()
-        target = args[0]
         if len(args) == 0:
             objects = storage.all()
             for item in objects:
                 print(item)
         else:
+            name = f"{args[0]}.id"
             out = []
-            idx = 0
-            if target in self.all_classes:
-                objects = storage.all().get(target)
-                for item in objects:
-                    out[idx] = item
-                    idx += 1
+
+            if args[0] in self.all_classes:
+                objects = storage.all()
+                obj = objects[name]
+                out.append(str(obj))
                 print(out)
             else:
                 print("** class doesn't exist **")

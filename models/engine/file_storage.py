@@ -30,8 +30,13 @@ class FileStorage:
         '''
 
         with open(self.__file_path, 'w') as file:
-            json.dump({k: v.to_dict()
-                       for k, v in self.__objects.items()}, file)
+            cls_n = self.__class__.__name__
+            idn = self.__objects["id"]
+            format = ("{}.{}".format(cls_n, idn))
+            json_dict = {}
+            for k, v in self.__objects.items():
+                json_dict[format] = v.to_dict()
+            json.dump(json_dict, file)
 
     def reload(self):
         ''' reloads objects from a JSON file '''

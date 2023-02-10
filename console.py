@@ -20,12 +20,21 @@ class HBNBCommand(cmd.Cmd):
     """
     Class definition for the command line processor
     """
+    prompt = '(hbnb) '
 
     def do_quit(self, line):
+        '''Quit command to exit the program
+        '''
+        print("Exiting.")
         return True
 
     def do_EOF(self, line):
+        '''Quit command to exit the program'''
+        print("Exiting.")
         return True
+
+    def emptyline(self):
+        print("", end="")
 
 
 if __name__ == "__main__":

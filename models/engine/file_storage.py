@@ -28,15 +28,9 @@ class FileStorage:
         saves __objects to the JSON file "file.json"
         and keeps a separate record of every instance
         '''
-
-        with open(self.__file_path, 'w') as file:
-            cls_n = self.__class__.__name__
-            idn = self.__objects["id"]
-            format = ("{}.{}".format(cls_n, idn))
-            json_dict = {}
-            for k, v in self.__objects.items():
-                json_dict[format] = v.to_dict()
-            json.dump(json_dict, file)
+        with open(self.__file_path, 'w+') as f:
+            json.dump({k: v.to_dict() for k, v in self.__objects.items()
+                       }, f)
 
     def reload(self):
         ''' reloads objects from a JSON file '''

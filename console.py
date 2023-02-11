@@ -7,7 +7,8 @@
     class definition is: class HBNBCommand(cmd.Cmd):
     implements:
         quit and EOF to exit the program
-        help (this action is provided by default by cmd but updated and documented)
+        help (this action is provided by default by
+        cmd but updated and documented)
 
     a custom prompt: (hbnb)
     an empty line + ENTER doesn't execute anything
@@ -84,6 +85,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         else:
+            state = False
             cls = args[0]
             id = args[1]
             objects = storage.all()
@@ -91,6 +93,7 @@ class HBNBCommand(cmd.Cmd):
                 if k == "{}.{}" .format(cls, id):
                     print(v)
                     state = True
+
             if state is False:
                 print("** no instance found **")
 
@@ -98,8 +101,6 @@ class HBNBCommand(cmd.Cmd):
         """Deletes an instance"""
 
         args = args.split()
-        target = args[0]
-        iid = args[1]
         if len(args) < 1:
             print("** class name missing **")
 
@@ -110,16 +111,22 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         else:
-            data = storage.all().get(target + '.' + iid)
-            if data is None:
-                print("** no instance found **")
-            else:
-                del data
+            cls = args[0]
+            id = args[1]
+            objects = storage.all()
+            data = cls + '.' + id
+            if data in objects.keys():
+                del objects[data]
                 storage.save()
+            else:
+                print("** no instance found **")
 
     def do_all(self, args):
-        """Prints all string representation of all instances based or not on the class name
-        Example: $ all BaseModel |or| $ all"""
+        """
+        Prints all string representation of all instances
+        based or not on the class name
+        Example: $ all BaseModel |or| $ all
+        """
 
         args = args.split()
 
@@ -146,35 +153,44 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, args):
-        cls_n = args[0]
-        iid = args[1]
-        attr_n = args[2]
-        new_val = args[3]
+        """Updates the attributes of the specified instance"""
 
+        args = args.split()
         if len(args) < 1:
             print("** class name missing **")
 
-        elif iid < 2:
+        elif len(args) < 2:
             print("** instance id missing **")
 
-        elif cls_n not in self.all_classes:
+        elif args[0] not in self.all_classes:
             print("** class doesn't exist **")
 
-        elif attr_n not in self.all_classes:
+        elif len(args) < 3:
             print("** attribute name missing **")
 
-        elif new_val not in self.all_classes:
+        elif len(args) < 4:
             print("** value missing **")
 
         else:
-            data = storage.all().get(cls_n + '.' + iid)
-            if data is None:
+            cls = args[0]
+            id = args[1]
+            key = args[2]
+            try:
+                new_val = int(args[3])
+            except Exception:
+                try:
+                    new_val = float(args[3])
+                except Exception:
+                    new_val = str(args[3].strip('\'"'))
+
+            objects = storage.all()
+            key_fmt = "{}.{}" .format(cls, id)
+            if key_fmt not in objects.keys():
                 print("** no instance found **")
             else:
-                object = storage.all([cls_n])
-                for k, v in object.items():
-                    if k == attr_n:
-                        object[attr_n] = new_val
+                focus = objects[key_fmt]
+                setattr(focus, key, new_val)
+
         storage.save()
 
 

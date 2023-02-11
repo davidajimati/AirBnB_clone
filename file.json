@@ -1,1 +1,11 @@
-{"User.bfafcc15-bdfa-47d4-9103-2f24e1b0fe53": {"__class__": "User", "id": "bfafcc15-bdfa-47d4-9103-2f24e1b0fe53", "created_at": "2023-02-11T16:55:34.328286", "updated_at": "2023-02-11T16:55:34.328320"}, "Place.f58d0ba0-0a13-4d93-9e00-f6d2500ec57f": {"__class__": "Place", "id": "f58d0ba0-0a13-4d93-9e00-f6d2500ec57f", "created_at": "2023-02-11T16:55:50.339993", "updated_at": "2023-02-11T16:55:50.340012"}, "Amenity.d7144874-2faf-409f-b457-3ddaeb549196": {"__class__": "Amenity", "id": "d7144874-2faf-409f-b457-3ddaeb549196", "created_at": "2023-02-11T16:56:05.036740", "updated_at": "2023-02-11T16:56:05.036756"}, "State.772eefee-bf6e-4f8c-b6cf-81e19e0568d7": {"__class__": "State", "id": "772eefee-bf6e-4f8c-b6cf-81e19e0568d7", "created_at": "2023-02-11T16:56:20.500268", "updated_at": "2023-02-11T16:56:20.500291"}, "Review.429d617a-7b27-4ac9-9601-a65b73948949": {"__class__": "Review", "id": "429d617a-7b27-4ac9-9601-a65b73948949", "created_at": "2023-02-11T16:56:48.303801", "updated_at": "2023-02-11T16:56:48.303826"}, "City.ecd1bc32-dc15-4743-b632-ce75c2188532": {"__class__": "City", "id": "ecd1bc32-dc15-4743-b632-ce75c2188532", "created_at": "2023-02-11T16:57:05.518217", "updated_at": "2023-02-11T16:57:05.518236"}, "BaseModel.d58a8743-0116-416b-867d-cd83df0fa21a": {"__class__": "BaseModel", "id": "d58a8743-0116-416b-867d-cd83df0fa21a", "created_at": "2023-02-11T16:57:23.894832", "updated_at": "2023-02-11T16:57:23.894857"}, "User.e3ec26d2-4b99-4f84-b1de-450e5e57a50d": {"__class__": "User", "id": "e3ec26d2-4b99-4f84-b1de-450e5e57a50d", "created_at": "2023-02-11T17:41:47.761576", "updated_at": "2023-02-11T17:41:47.761593"}, "User.af71644e-1c90-417c-aa49-acc1b000e640": {"__class__": "User", "id": "af71644e-1c90-417c-aa49-acc1b000e640", "created_at": "2023-02-11T18:09:52.029356", "updated_at": "2023-02-11T18:09:52.029392"}}
+{
+    "BaseModel.cfc13242-31e3-4486-a6be-b8715cb8fd68": {
+        "__class__": "BaseModel",
+        "id": "cfc13242-31e3-4486-a6be-b8715cb8fd68",
+        "created_at": "2023-02-11T18:59:49.259066",
+        "updated_at": "2023-02-11T18:59:49.259081",
+        "first_name": "Betty",
+        "name": "Mike",
+        "last_name": "AJIMATI"
+    }
+}

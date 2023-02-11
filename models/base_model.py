@@ -7,7 +7,7 @@ This module contains the Parent class for the AirBnB clone Project
 # Import relevant modules
 import uuid
 from datetime import datetime
-from models.__init__ import storage
+from models import storage
 
 class BaseModel:
     ''' BaseModel class Definitions '''

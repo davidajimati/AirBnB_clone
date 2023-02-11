@@ -33,6 +33,15 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     all_classes = ['BaseModel', 'User', 'State',
                    'Review', 'Place', 'City', 'Amenity']
+    class_map = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "Review": Review,
+        "Place": Place,
+        "City": City,
+        "Amenity": Amenity
+    }
 
     def do_quit(self, line):
         '''Quit command to exit the program
@@ -105,20 +114,30 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, args):
+        """Prints all string representation of all instances based or not on the class name
+        Example: $ all BaseModel |or| $ all"""
+
         args = args.split()
+
         if len(args) == 0:
+            out = []
             objects = storage.all()
             for item in objects:
-                print(item)
-        else:
-            name = f"{args[0]}.id"
-            out = []
+                obj_attrs = objects[item]
+                out.append(str(obj_attrs))
+            print(out)
 
-            if args[0] in self.all_classes:
+        else:
+            cls = args[0]
+            obj_list = []
+
+            if cls in self.all_classes:
                 objects = storage.all()
-                obj = objects[name]
-                out.append(str(obj))
-                print(out)
+                for obj in objects.values():
+                    if type(obj) == self.class_map[cls]:
+                        obj_list.append(str(obj))
+                print(obj_list)
+
             else:
                 print("** class doesn't exist **")
 

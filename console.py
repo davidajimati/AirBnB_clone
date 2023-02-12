@@ -193,6 +193,8 @@ class HBNBCommand(cmd.Cmd):
 
         storage.save()
 
+# Advanced tasks ---------------------------------------------
+
     def do_User(self, line):
         """Prints all User classes instances"""
 
@@ -269,6 +271,85 @@ class HBNBCommand(cmd.Cmd):
                 if type(obj) == self.class_map["Amenity"]:
                     obj_list.append(str(obj))
             print(obj_list)
+
+# separator --------------------------------------------
+
+    def do_User(self, line):
+        """Prints User class instances count """
+
+        if line == ".count()":
+            count = 0
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["User"]:
+                    count += 1
+            print(count)
+
+    def do_State(self, line):
+        """Prints State class instances count """
+
+        if line == ".count()":
+            count = 0
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["State"]:
+                    count += 1
+            print(count)
+
+    def do_Review(self, line):
+        """Prints Review class instances count """
+
+        if line == ".count()":
+            count = 0
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["Review"]:
+                    count += 1
+            print(count)
+
+    def do_Place(self, line):
+        """Prints Place class instances count """
+
+        if line == ".count()":
+            count = 0
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["Place"]:
+                    count += 1
+            print(count)
+
+    def do_City(self, line):
+        """Prints City class instances count """
+
+        if line == ".count()":
+            count = 0
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["City"]:
+                    count += 1
+            print(count)
+
+    def do_BaseModel(self, line):
+        """Prints BaseModel class instances count """
+
+        if line == ".count()":
+            count = 0
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["BaseModel"]:
+                    count += 1
+            print(count)
+
+    def do_Amenity(self, line):
+        """Prints Amenity class instances count """
+
+        if line == ".count()":
+            count = 0
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["Amenity"]:
+                    count += 1
+            print(count)
 
 
 if __name__ == "__main__":

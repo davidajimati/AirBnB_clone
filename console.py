@@ -353,7 +353,7 @@ class HBNBCommand(cmd.Cmd):
 
 # Separator ------------------------------------
 
-    def real(self, string):
+    def parse(self, string):
         '''Parses commands and returns string'''
         real = []
 
@@ -370,23 +370,19 @@ class HBNBCommand(cmd.Cmd):
 # Separator --------------------------------------------
 
     def do_User(self, args):
+        """
+        retrieve an instance based on its ID: <class name>.show(<id>)
+        """
 
-        rem = args.translate(str.maketrans("", "", ".()\""))
-        args = rem.split()
-        print(args)
+        args = self.parse(args)
 
         if len(args) == 3 and args[1] == "show":
             iid = args[2]
             key = "User.{}".format(iid)
-            print(f"key is: {key}")
-            print(f"args[0] = {args[0]}")
-            print(f"args[1] = {args[1]}")
-            print(f"args[2] = {args[2]}")
-
-            # objects = storage.all()
-            # for obj, val in objects.items():
-            #     if obj == key:
-            #         print(val)
+            objects = storage.all()
+            for obj, val in objects.items():
+                if obj == key:
+                    print(val)
 
 
 if __name__ == "__main__":

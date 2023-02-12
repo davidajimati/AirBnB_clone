@@ -195,84 +195,98 @@ class HBNBCommand(cmd.Cmd):
 
 # Advanced tasks ---------------------------------------------
 
-    def do_User(self, line):
+# Command Parsers ---------------------------------------- Start
+
+    def grand_parser(self, str, cls_name):
+        """Delegates the parsing to the right algorithm"""
+        if str[-2:] == '")':
+            return (self.parse_id(str))
+        elif str[-6:] == 'show()':
+            return (self.show_parser(str, cls_name))
+        elif str[-6:] == '.all()':
+            return (self.all_parser(str, cls_name))
+
+# ------------------------GRAND SEALED------------------------------
+
+    def show_parser(self, string, cls_name):
+        '''Parses command and returns list'''
+        res = (string.split('.'))
+        return (self.iid_printer())
+
+# ------------------------SHOW SEALED ------------------------------
+
+    def all_parser(self, string, cls_name):
+        '''Parses command and returns list'''
+        res = string.split('.')
+        return (self.printer_engine(cls_name, res[1]))
+
+# ------------------------ALL SEALED ------------------------------
+
+    def parse_id(self, string, cls_name):
+        '''Parses command and returns list'''
+        real = []
+
+        pre = string.split('.')
+        real.append(pre[0])
+
+        pre2 = pre[1].split('("')
+        real.append(pre2[0])
+
+        pre3 = pre2[1].split('")')
+        real.append(pre3[0])
+        return (self.iid_printer(cls_name, real[1], real[2]))
+
+# -------------------- PARSE_ID SEALED ------------------------------
+
+# -------------------- Engine area ----------------------------------
+
+# All printer Engine
+    def printer_engine(self, cls_name, command):
+        '''Returns list of all instances of a class'''
+
+        if command == "all()":
+            obj_list = []
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map[cls_name]:
+                    obj_list.append(str(obj))
+            return (obj_list)
+
+# --------------Printer Engine sealed ---------------------------------
+
+    def do_User(self, args):
         """Prints all User classes instances"""
+        print(self.grand_parser(args, "User"))
 
-        if line == ".all()":
-            obj_list = []
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["User"]:
-                    obj_list.append(str(obj))
-            print(obj_list)
-
-    def do_State(self, line):
+    def do_State(self, args):
         """Prints all State class instances"""
+        print(self.grand_parser(args, "State"))
 
-        if line == ".all()":
-            obj_list = []
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["State"]:
-                    obj_list.append(str(obj))
-            print(obj_list)
-
-    def do_Review(self, line):
+    def do_Review(self, args):
         """Prints all Review class instances"""
+        print(self.grand_parser(args, "Review"))
 
-        if line == ".all()":
-            obj_list = []
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["Review"]:
-                    obj_list.append(str(obj))
-            print(obj_list)
-
-    def do_Place(self, line):
+    def do_Place(self, args):
         """Prints all Place class instances"""
+        print(self.grand_parser(args, "Place"))
 
-        if line == ".all()":
-            obj_list = []
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["Place"]:
-                    obj_list.append(str(obj))
-            print(obj_list)
-
-    def do_City(self, line):
+    def do_City(self, args):
         """Prints all City class instances"""
+        print(self.grand_parser(args, "City"))
 
-        if line == ".all()":
-            obj_list = []
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["City"]:
-                    obj_list.append(str(obj))
-            print(obj_list)
-
-    def do_BaseModel(self, line):
+    def do_BaseModel(self, args):
         """Prints all BaseModel class instances"""
+        print(self.grand_parser(args, "BaseModel"))
 
-        if line == ".all()":
-            obj_list = []
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["BaseModel"]:
-                    obj_list.append(str(obj))
-            print(obj_list)
-
-    def do_Amenity(self, line):
+    def do_Amenity(self, args):
         """Prints all Amenity instances"""
-
-        if line == ".all()":
-            obj_list = []
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["Amenity"]:
-                    obj_list.append(str(obj))
-            print(obj_list)
+        print(self.grand_parser(args, "Amenity"))
 
 # separator --------------------------------------------
+# Counter Engine Function
+
+    def counter(self, cls_name):
+        pass
 
     def do_User(self, line):
         """Prints User class instances count """
@@ -352,20 +366,16 @@ class HBNBCommand(cmd.Cmd):
             print(count)
 
 # Separator ------------------------------------
+# Instance attributes **SHOW** ENGINE
+    def iid_printer(self, cls_name, command, iid):
 
-    def parse(self, string):
-        '''Parses commands and returns string'''
-        real = []
-
-        pre = string.split('.')
-        real.append(pre[0])
-
-        pre2 = pre[1].split('("')
-        real.append(pre2[0])
-
-        pre3 = pre2[1].split('")')
-        real.append(pre3[0])
-        return real
+        if command == "show":
+            iid = list[2]
+            key = "{}.{}".format(cls_name, iid)
+            objects = storage.all()
+            for obj, val in objects.items():
+                if obj == key:
+                    return (val)
 
 # Separator --------------------------------------------
 
@@ -373,16 +383,49 @@ class HBNBCommand(cmd.Cmd):
         """
         retrieve an instance based on its ID: <class name>.show(<id>)
         """
+        print(self.grand_parser(args, "User"))
 
-        args = self.parse(args)
+    def do_State(self, args):
+        """
+        retrieve an instance based on its ID: <class name>.show(<id>)
+        """
+        args = self.grand_parser(args)
+        print(self.iid_printer(args, "State"))
 
-        if len(args) == 3 and args[1] == "show":
-            iid = args[2]
-            key = "User.{}".format(iid)
-            objects = storage.all()
-            for obj, val in objects.items():
-                if obj == key:
-                    print(val)
+    def do_Review(self, args):
+        """
+        retrieve an instance based on its ID: <class name>.show(<id>)
+        """
+        args = self.grand_parser(args)
+        print(self.iid_printer(args, "Review"))
+
+    def do_Place(self, args):
+        """
+        retrieve an instance based on its ID: <class name>.show(<id>)
+        """
+        args = self.grand_parser(args)
+        print(self.iid_printer(args, "Place"))
+
+    def do_City(self, args):
+        """
+        retrieve an instance based on its ID: <class name>.show(<id>)
+        """
+        args = self.grand_parser(args)
+        print(self.iid_printer(args, "City"))
+
+    def do_BaseModel(self, args):
+        """
+        retrieve an instance based on its ID: <class name>.show(<id>)
+        """
+        args = self.grand_parser(args)
+        print(self.iid_printer(args, "BaseModel"))
+
+    def do_Amenity(self, args):
+        """
+        retrieve an instance based on its ID: <class name>.show(<id>)
+        """
+        args = self.grand_parser(args)
+        print(self.iid_printer(args, "Amenity"))
 
 
 if __name__ == "__main__":

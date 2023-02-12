@@ -193,6 +193,83 @@ class HBNBCommand(cmd.Cmd):
 
         storage.save()
 
+    def do_User(self, line):
+        """Prints all User classes instances"""
+
+        if line == ".all()":
+            obj_list = []
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["User"]:
+                    obj_list.append(str(obj))
+            print(obj_list)
+
+    def do_State(self, line):
+        """Prints all State class instances"""
+
+        if line == ".all()":
+            obj_list = []
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["State"]:
+                    obj_list.append(str(obj))
+            print(obj_list)
+
+    def do_Review(self, line):
+        """Prints all Review class instances"""
+
+        if line == ".all()":
+            obj_list = []
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["Review"]:
+                    obj_list.append(str(obj))
+            print(obj_list)
+
+    def do_Place(self, line):
+        """Prints all Place class instances"""
+
+        if line == ".all()":
+            obj_list = []
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["Place"]:
+                    obj_list.append(str(obj))
+            print(obj_list)
+
+    def do_City(self, line):
+        """Prints all City class instances"""
+
+        if line == ".all()":
+            obj_list = []
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["City"]:
+                    obj_list.append(str(obj))
+            print(obj_list)
+
+    def do_BaseModel(self, line):
+        """Prints all BaseModel class instances"""
+
+        if line == ".all()":
+            obj_list = []
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["BaseModel"]:
+                    obj_list.append(str(obj))
+            print(obj_list)
+
+    def do_Amenity(self, line):
+        """Prints all Amenity instances"""
+
+        if line == ".all()":
+            obj_list = []
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["Amenity"]:
+                    obj_list.append(str(obj))
+            print(obj_list)
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

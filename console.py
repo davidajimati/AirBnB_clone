@@ -351,6 +351,43 @@ class HBNBCommand(cmd.Cmd):
                     count += 1
             print(count)
 
+# Separator ------------------------------------
+
+    def real(self, string):
+        '''Parses commands and returns string'''
+        real = []
+
+        pre = string.split('.')
+        real.append(pre[0])
+
+        pre2 = pre[1].split('("')
+        real.append(pre2[0])
+
+        pre3 = pre2[1].split('")')
+        real.append(pre3[0])
+        return real
+
+# Separator --------------------------------------------
+
+    def do_User(self, args):
+
+        rem = args.translate(str.maketrans("", "", ".()\""))
+        args = rem.split()
+        print(args)
+
+        if len(args) == 3 and args[1] == "show":
+            iid = args[2]
+            key = "User.{}".format(iid)
+            print(f"key is: {key}")
+            print(f"args[0] = {args[0]}")
+            print(f"args[1] = {args[1]}")
+            print(f"args[2] = {args[2]}")
+
+            # objects = storage.all()
+            # for obj, val in objects.items():
+            #     if obj == key:
+            #         print(val)
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

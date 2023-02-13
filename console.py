@@ -277,7 +277,7 @@ class HBNBCommand(cmd.Cmd):
         words = [word.strip().strip('"') for word in data[1:]]
         real.append(uuid)
         real += words
-        self.iid_printer(cls_name, real[1], real[2])
+        self.do_update(f"{cls_name} {real[2]} {real[3]} {real[4]}")
 
 # -------------------- PARSE_ID ------------------------------
 

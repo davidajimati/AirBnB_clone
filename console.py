@@ -205,6 +205,8 @@ class HBNBCommand(cmd.Cmd):
             return (self.show_parser(str, cls_name))
         elif str[-6:] == '.all()':
             return (self.all_parser(str, cls_name))
+        elif str[-6:] == 'ount()':
+            return self.counter_parser(str, cls_name)
 
 # ------------------------GRAND SEALED------------------------------
 
@@ -221,6 +223,13 @@ class HBNBCommand(cmd.Cmd):
         return (self.printer_engine(cls_name, res[1]))
 
 # ------------------------ALL SEALED ------------------------------
+
+    def counter_parser(self, string, cls_name):
+        '''Parses command and returns list'''
+        res = string.split('.')
+        return (self.counter_engine(cls_name, res[1]))
+
+# ------------------------COUNTER_PARSER SEALED ---------------------
 
     def parse_id(self, string, cls_name):
         '''Parses command and returns list'''
@@ -286,93 +295,48 @@ class HBNBCommand(cmd.Cmd):
 # Counter Engine Function
 
     def counter_engine(self, cls_name, command):
-
+        """Counts the number of instances in a Class"""
         if command == "count()":
             count = 0
             objects = storage.all()
             for obj in objects.values():
-                if type(obj) == self.class_map["User"]:
+                if type(obj) == self.class_map[cls_name]:
                     count += 1
-            print(count)
+            return (count)
 
-    def do_User(self, line):
-        """Prints User class instances count """
+# Engine sealed ----------------------------------------
 
-        if line == ".count()":
-            count = 0
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["User"]:
-                    count += 1
-            print(count)
+# -------------------- COUNT CITY ----------------------
+    def do_User(self, args):
+        """Prints User instances count """
+        print(self.grand_parser(args, "User"))
 
-    def do_State(self, line):
-        """Prints State class instances count """
+    def do_State(self, args):
+        """Prints State instances count """
+        print(self.grand_parser(args, "State"))
 
-        if line == ".count()":
-            count = 0
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["State"]:
-                    count += 1
-            print(count)
+    def do_Review(self, args):
+        """Prints Review instances count """
+        print(self.grand_parser(args, "Review"))
 
-    def do_Review(self, line):
-        """Prints Review class instances count """
+    def do_Place(self, args):
+        """Prints Place instances count """
+        print(self.grand_parser(args, "Place"))
 
-        if line == ".count()":
-            count = 0
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["Review"]:
-                    count += 1
-            print(count)
+    def do_City(self, args):
+        """Prints City instances count """
+        print(self.grand_parser(args, "City"))
 
-    def do_Place(self, line):
-        """Prints Place class instances count """
+    def do_BaseModel(self, args):
+        """Prints BaseModel instances count """
+        print(self.grand_parser(args, "BaseModel"))
 
-        if line == ".count()":
-            count = 0
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["Place"]:
-                    count += 1
-            print(count)
-
-    def do_City(self, line):
-        """Prints City class instances count """
-
-        if line == ".count()":
-            count = 0
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["City"]:
-                    count += 1
-            print(count)
-
-    def do_BaseModel(self, line):
-        """Prints BaseModel class instances count """
-
-        if line == ".count()":
-            count = 0
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["BaseModel"]:
-                    count += 1
-            print(count)
-
-    def do_Amenity(self, line):
-        """Prints Amenity class instances count """
-
-        if line == ".count()":
-            count = 0
-            objects = storage.all()
-            for obj in objects.values():
-                if type(obj) == self.class_map["Amenity"]:
-                    count += 1
-            print(count)
+    def do_Amenity(self, args):
+        """Prints Amenity instances count """
+        print(self.grand_parser(args, "Amenity"))
 
 # Separator ------------------------------------
+
 # Instance attributes **SHOW** ENGINE
     def iid_printer(self, cls_name, command, iid):
 

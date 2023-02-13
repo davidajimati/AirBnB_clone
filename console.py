@@ -200,9 +200,10 @@ class HBNBCommand(cmd.Cmd):
 # Command Parsers ------------------------------------- Start
     def grand_parser(self, str, cls_name):
         """Delegates the parsing to the right algorithm"""
-        # if str[-47:-40] == 'destroy':
-        #     self.do_destroy(str)
-        if str[-2:] == '")':
+
+        if str.split('.')[1][:6] == "update":
+            self.update_parse(str, cls_name)
+        elif str[-2:] == '")':
             self.parse_id(str, cls_name)
         elif str[-6:] == 'show()':
             self.show_parser(str, cls_name)
@@ -256,6 +257,27 @@ class HBNBCommand(cmd.Cmd):
         '''Parses command and returns list'''
         res = (string.split('.'))
         self.iid_printer(cls_name, res[1], res[2])
+
+# -------------------- UPDATE_PARSE ------------------------------
+
+    def update_parse(self, string, cls_name):
+        '''Parses command and returns list'''
+        real = []
+
+        pre = string.split('.')
+        real.append(pre[0])
+
+        pre2 = pre[1].split('("')
+        real.append(pre2[0])
+
+        start = string.index('("') + 2
+        end = string.index('")')
+        data = string[start:end].split(',')
+        uuid = data[0].strip().strip('"')
+        words = [word.strip().strip('"') for word in data[1:]]
+        real.append(uuid)
+        real += words
+        self.iid_printer(cls_name, real[1], real[2])
 
 # -------------------- PARSE_ID ------------------------------
 

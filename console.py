@@ -200,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
     def grand_parser(self, str, cls_name):
         """Delegates the parsing to the right algorithm"""
         if str[-2:] == '")':
-            return (self.parse_id(str))
+            return (self.parse_id(str, cls_name))
         elif str[-6:] == 'show()':
             return (self.show_parser(str, cls_name))
         elif str[-6:] == '.all()':
@@ -211,7 +211,7 @@ class HBNBCommand(cmd.Cmd):
     def show_parser(self, string, cls_name):
         '''Parses command and returns list'''
         res = (string.split('.'))
-        return (self.iid_printer())
+        return (self.iid_printer(cls_name, res[1], res[2]))
 
 # ------------------------SHOW SEALED ------------------------------
 
@@ -285,8 +285,15 @@ class HBNBCommand(cmd.Cmd):
 # separator --------------------------------------------
 # Counter Engine Function
 
-    def counter(self, cls_name):
-        pass
+    def counter_engine(self, cls_name, command):
+
+        if command == "count()":
+            count = 0
+            objects = storage.all()
+            for obj in objects.values():
+                if type(obj) == self.class_map["User"]:
+                    count += 1
+            print(count)
 
     def do_User(self, line):
         """Prints User class instances count """
@@ -370,7 +377,6 @@ class HBNBCommand(cmd.Cmd):
     def iid_printer(self, cls_name, command, iid):
 
         if command == "show":
-            iid = list[2]
             key = "{}.{}".format(cls_name, iid)
             objects = storage.all()
             for obj, val in objects.items():
@@ -389,43 +395,37 @@ class HBNBCommand(cmd.Cmd):
         """
         retrieve an instance based on its ID: <class name>.show(<id>)
         """
-        args = self.grand_parser(args)
-        print(self.iid_printer(args, "State"))
+        print(self.grand_parser(args, 'State'))
 
     def do_Review(self, args):
         """
         retrieve an instance based on its ID: <class name>.show(<id>)
         """
-        args = self.grand_parser(args)
-        print(self.iid_printer(args, "Review"))
+        print(self.grand_parser(args, "Review"))
 
     def do_Place(self, args):
         """
         retrieve an instance based on its ID: <class name>.show(<id>)
         """
-        args = self.grand_parser(args)
-        print(self.iid_printer(args, "Place"))
+        print(self.grand_parser(args, "Place"))
 
     def do_City(self, args):
         """
         retrieve an instance based on its ID: <class name>.show(<id>)
         """
-        args = self.grand_parser(args)
-        print(self.iid_printer(args, "City"))
+        print(self.grand_parser(args, "City"))
 
     def do_BaseModel(self, args):
         """
         retrieve an instance based on its ID: <class name>.show(<id>)
         """
-        args = self.grand_parser(args)
-        print(self.iid_printer(args, "BaseModel"))
+        print(self.grand_parser(args, "BaseModel"))
 
     def do_Amenity(self, args):
         """
         retrieve an instance based on its ID: <class name>.show(<id>)
         """
-        args = self.grand_parser(args)
-        print(self.iid_printer(args, "Amenity"))
+        print(self.grand_parser(args, "Amenity"))
 
 
 if __name__ == "__main__":

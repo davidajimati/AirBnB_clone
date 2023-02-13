@@ -339,6 +339,7 @@ class HBNBCommand(cmd.Cmd):
 
 # Instance attributes **SHOW** ENGINE
     def iid_printer(self, cls_name, command, iid):
+        """Handles the search and returns a list"""
 
         if command == "show":
             key = "{}.{}".format(cls_name, iid)
@@ -346,51 +347,134 @@ class HBNBCommand(cmd.Cmd):
             for obj, val in objects.items():
                 if obj == key:
                     return (val)
-            return("** no instance found **")
+            return ("** no instance found **")
+
+        elif command == "destroy":
+            self.destroy_engine(cls_name, iid)
 
 # Separator --------------------------------------------
 
     def do_User(self, args):
         """
-        retrieve an instance based on its ID: <class name>.show(<id>)
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
         """
         print(self.grand_parser(args, "User"))
 
     def do_State(self, args):
         """
-        retrieve an instance based on its ID: <class name>.show(<id>)
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
         """
         print(self.grand_parser(args, 'State'))
 
     def do_Review(self, args):
         """
-        retrieve an instance based on its ID: <class name>.show(<id>)
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
         """
         print(self.grand_parser(args, "Review"))
 
     def do_Place(self, args):
         """
-        retrieve an instance based on its ID: <class name>.show(<id>)
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
         """
         print(self.grand_parser(args, "Place"))
 
     def do_City(self, args):
         """
-        retrieve an instance based on its ID: <class name>.show(<id>)
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
         """
         print(self.grand_parser(args, "City"))
 
     def do_BaseModel(self, args):
         """
-        retrieve an instance based on its ID: <class name>.show(<id>)
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
         """
         print(self.grand_parser(args, "BaseModel"))
 
     def do_Amenity(self, args):
         """
-        retrieve an instance based on its ID: <class name>.show(<id>)
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
         """
         print(self.grand_parser(args, "Amenity"))
+
+
+# Separator--------------- DESTROY CITY BELOW --------------
+# Destroy Engine **Danger Zone** ----------***
+# uses the show engine <en -reroute
+
+
+    def destroy_engine(self, cls_name, iid):
+        """
+        Search and Deletes an instance
+        <class name>.destroy(<id>)
+        """
+
+        key = "{}.{}".format(cls_name, iid)
+        objects = storage.all()
+        if key in objects.keys():
+            del objects[key]
+            storage.save()
+        else:
+            print("** no instance found **")
+
+
+# Separator --------------------------------------------
+
+
+    def do_User(self, args):
+        """
+        destroy an instance based on his ID:
+        <class name>.destroy(<id>)
+        """
+        self.grand_parser(args, "User")
+
+    def do_State(self, args):
+        """
+        destroy an instance based on his ID:
+        <class name>.destroy(<id>)
+        """
+        self.grand_parser(args, "State")
+
+    def do_Review(self, args):
+        """
+        destroy an instance based on his ID:
+        <class name>.destroy(<id>)
+        """
+        self.grand_parser(args, "Review")
+
+    def do_Place(self, args):
+        """
+        destroy an instance based on his ID:
+        <class name>.destroy(<id>)
+        """
+        self.grand_parser(args, "Place")
+
+    def do_City(self, args):
+        """
+        destroy an instance based on his ID:
+        <class name>.destroy(<id>)
+        """
+        self.grand_parser(args, "City")
+
+    def do_BaseModel(self, args):
+        """
+        destroy an instance based on his ID:
+        <class name>.destroy(<id>)
+        """
+        self.grand_parser(args, "BaseModel")
+
+    def do_Amenity(self, args):
+        """
+        destroy an instance based on his ID:
+        <class name>.destroy(<id>)
+        """
+        self.grand_parser(args, "Amenity")
 
 
 if __name__ == "__main__":

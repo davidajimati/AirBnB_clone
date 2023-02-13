@@ -62,5 +62,8 @@ class TestConsole(unittest.TestCase):
         self.assertTrue(cli.onecmd("quit"))
 
 
+with patch('sys.stdout', new=StringIO()) as f:
+    HBNBCommand().onecmd("help show")
+
 if __name__ == '__main__':
     unittest.main()

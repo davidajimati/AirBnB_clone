@@ -193,31 +193,33 @@ class HBNBCommand(cmd.Cmd):
 
         storage.save()
 
-# Advanced tasks -------------------------------------------
+# ******************** Advanced tasks ********************
+
+# _____________________ENGINES ARENA ________________________
 
 # Command Parsers ------------------------------------- Start
     def grand_parser(self, str, cls_name):
         """Delegates the parsing to the right algorithm"""
-
+        # if str[-47:-40] == 'destroy':
+        #     self.do_destroy(str)
         if str[-2:] == '")':
-            return(self.parse_id(str, cls_name))
+            self.parse_id(str, cls_name)
         elif str[-6:] == 'show()':
-            return (self.show_parser(str, cls_name))
+            self.show_parser(str, cls_name)
         elif str[-6:] == '.all()':
-            return (self.all_parser(str, cls_name))
+            self.all_parser(str, cls_name)
         elif str[-6:] == 'ount()':
-            return self.counter_parser(str, cls_name)
+            self.counter_parser(str, cls_name)
 
-# ------------------------GRAND SEALED------------------------------
+# -------------------- All_Parser Engine ---------------------------------
 
     def all_parser(self, string, cls_name):
         '''Parses command and returns list'''
         res = string.split('.')
-        return (self.printer_engine(cls_name, res[1]))
+        self.printer_engine(cls_name, res[1])
 
-# -------------------- Engine area ----------------------------------
+# ---------------------- printer Engine-------------------------
 
-# All printer Engine
     def printer_engine(self, cls_name, command):
         '''Returns list of all instances of a class'''
 
@@ -227,49 +229,16 @@ class HBNBCommand(cmd.Cmd):
             for obj in objects.values():
                 if type(obj) == self.class_map[cls_name]:
                     obj_list.append(str(obj))
-            return (obj_list)
+            print(obj_list)
 
-# --------------Printer Engine sealed ---------------------------------
-
-# ------------------------ALL SEALED ------------------------------
-
-    def do_User(self, args):
-        """Prints all User classes instances"""
-        print(self.grand_parser(args, "User"))
-
-    def do_State(self, args):
-        """Prints all State class instances"""
-        print(self.grand_parser(args, "State"))
-
-    def do_Review(self, args):
-        """Prints all Review class instances"""
-        print(self.grand_parser(args, "Review"))
-
-    def do_Place(self, args):
-        """Prints all Place class instances"""
-        print(self.grand_parser(args, "Place"))
-
-    def do_City(self, args):
-        """Prints all City class instances"""
-        print(self.grand_parser(args, "City"))
-
-    def do_BaseModel(self, args):
-        """Prints all BaseModel class instances"""
-        print(self.grand_parser(args, "BaseModel"))
-
-    def do_Amenity(self, args):
-        """Prints all Amenity instances"""
-        print(self.grand_parser(args, "Amenity"))
-
-# separator --------------------------------------------
+# ------------------------COUNTER_PARSER--------------------
 
     def counter_parser(self, string, cls_name):
         '''Parses command and returns list'''
         res = string.split('.')
-        return (self.counter_engine(cls_name, res[1]))
+        self.counter_engine(cls_name, res[1])
 
-# ------------------------COUNTER_PARSER SEALED ---------------------
-# Counter Engine Function
+# -----------------------Counter Engine Function ------------
 
     def counter_engine(self, cls_name, command):
         """Counts the number of instances in a Class"""
@@ -279,47 +248,16 @@ class HBNBCommand(cmd.Cmd):
             for obj in objects.values():
                 if type(obj) == self.class_map[cls_name]:
                     count += 1
-            return (count)
+            print(count)
 
-# Engine sealed ----------------------------------------
-# -------------------- COUNT CITY ----------------------
-
-    def do_User(self, args):
-        """Prints User instances count """
-        print(self.grand_parser(args, "User"))
-
-    def do_State(self, args):
-        """Prints State instances count """
-        print(self.grand_parser(args, "State"))
-
-    def do_Review(self, args):
-        """Prints Review instances count """
-        print(self.grand_parser(args, "Review"))
-
-    def do_Place(self, args):
-        """Prints Place instances count """
-        print(self.grand_parser(args, "Place"))
-
-    def do_City(self, args):
-        """Prints City instances count """
-        print(self.grand_parser(args, "City"))
-
-    def do_BaseModel(self, args):
-        """Prints BaseModel instances count """
-        print(self.grand_parser(args, "BaseModel"))
-
-    def do_Amenity(self, args):
-        """Prints Amenity instances count """
-        print(self.grand_parser(args, "Amenity"))
-
-# ------------------------SHOW PARSER ------------------------------
+# ------------------------SHOW------------------------------
 
     def show_parser(self, string, cls_name):
         '''Parses command and returns list'''
         res = (string.split('.'))
-        return (self.iid_printer(cls_name, res[1], res[2]))
+        self.iid_printer(cls_name, res[1], res[2])
 
-# ------------------------SHOW SEALED ------------------------------
+# -------------------- PARSE_ID ------------------------------
 
     def parse_id(self, string, cls_name):
         '''Parses command and returns list'''
@@ -333,9 +271,7 @@ class HBNBCommand(cmd.Cmd):
 
         pre3 = pre2[1].split('")')
         real.append(pre3[0])
-        return (self.iid_printer(cls_name, real[1], real[2]))
-
-# -------------------- PARSE_ID SEALED ------------------------------
+        self.iid_printer(cls_name, real[1], real[2])
 
     def iid_printer(self, cls_name, command, iid):
         """Handles the search and returns a list"""
@@ -345,141 +281,42 @@ class HBNBCommand(cmd.Cmd):
             objects = storage.all()
             for obj, val in objects.items():
                 if obj == key:
-                    return (val)
-            return ("** no instance found **")
-
+                    print(val)
+                    return
+            print("** no instance found **")
+            return
         elif command == "destroy":
-            ret = self.call_destroy(f"{cls_name} {iid}")
-
-# Separator ---------------------------------------------
+            self.do_destroy(f"{cls_name} {iid}")
 
 # Separator --------------------------------------------
 
     def do_User(self, args):
-        """
-        retrieve an instance based on its ID:
-        <class name>.show(<id>)
-        """
-        print(self.grand_parser(args, "User"))
+        """Prints all User classes instances"""
+        self.grand_parser(args, "User")
 
     def do_State(self, args):
-        """
-        retrieve an instance based on its ID:
-        <class name>.show(<id>)
-        """
-        print(self.grand_parser(args, 'State'))
+        """Prints all State class instances"""
+        self.grand_parser(args, "State")
 
     def do_Review(self, args):
-        """
-        retrieve an instance based on its ID:
-        <class name>.show(<id>)
-        """
-        print(self.grand_parser(args, "Review"))
+        """Prints all Review class instances"""
+        self.grand_parser(args, "Review")
 
     def do_Place(self, args):
-        """
-        retrieve an instance based on its ID:
-        <class name>.show(<id>)
-        """
-        print(self.grand_parser(args, "Place"))
+        """Prints all Place class instances"""
+        self.grand_parser(args, "Place")
 
     def do_City(self, args):
-        """
-        retrieve an instance based on its ID:
-        <class name>.show(<id>)
-        """
-        print(self.grand_parser(args, "City"))
+        """Prints all City class instances"""
+        self.grand_parser(args, "City")
 
     def do_BaseModel(self, args):
-        """
-        retrieve an instance based on its ID:
-        <class name>.show(<id>)
-        """
-        print(self.grand_parser(args, "BaseModel"))
+        """Prints all BaseModel class instances"""
+        self.grand_parser(args, "BaseModel")
 
     def do_Amenity(self, args):
-        """
-        retrieve an instance based on its ID:
-        <class name>.show(<id>)
-        """
-        print(self.grand_parser(args, "Amenity"))
-
-# Separator--------------- DESTROY CITY BELOW --------------
-    def call_destroy(self, str):
-        ret = self.do_destroy(str)
-
-# -------------------- PARSE_ID SEALED ------------------------------
-
-# uses the show engine <en -reroute
-
-    # def destroy_engine(self, cls_name, command, iid):
-    #     """
-    #     Search and Deletes an instance
-    #     <class name>.destroy(<id>)
-    #     """
-    #     if command == "destroy":
-    #         objects = storage.all()
-    #         data = cls_name + '.' + iid
-    #         if data in objects.keys():
-    #             del objects[data]
-    #             storage.save()
-    #             return
-    #         else:
-    #             print("** no instance found **")
-    #             return
-    #     elif command == "show":
-    #         self.iid_printer(self, cls_name, command, iid)
-
-    # # Separator --------------------------------------------
-
-    # def do_User(self, args):
-    #     """
-    #     destroy an instance based on his ID:
-    #     <class name>.destroy(<id>)
-    #     """
-    #     self.grand_parser(args, "User")
-
-    # def do_State(self, args):
-    #     """
-    #     destroy an instance based on his ID:
-    #     <class name>.destroy(<id>)
-    #     """
-    #     self.grand_parser(args, "State")
-
-    # def do_Review(self, args):
-    #     """
-    #     destroy an instance based on his ID:
-    #     <class name>.destroy(<id>)
-    #     """
-    #     self.grand_parser(args, "Review")
-
-    # def do_Place(self, args):
-    #     """
-    #     destroy an instance based on his ID:
-    #     <class name>.destroy(<id>)
-    #     """
-    #     self.grand_parser(args, "Place")
-
-    # def do_City(self, args):
-    #     """
-    #     destroy an instance based on his ID:
-    #     <class name>.destroy(<id>)
-    #     """
-    #     self.grand_parser(args, "City")
-
-    # def do_BaseModel(self, args):
-    #     """
-    #     destroy an instance based on his ID:
-    #     <class name>.destroy(<id>)
-    #     """
-    #     self.grand_parser(args, "BaseModel")
-
-    # def do_Amenity(self, args):
-    #     """
-    #     destroy an instance based on his ID:
-    #     <class name>.destroy(<id>)
-    #     """
-    #     self.grand_parser(args, "Amenity")
+        """Prints all Amenity instances"""
+        self.grand_parser(args, "Amenity")
 
 
 if __name__ == "__main__":

@@ -346,6 +346,7 @@ class HBNBCommand(cmd.Cmd):
             for obj, val in objects.items():
                 if obj == key:
                     return (val)
+            return("** no instance found **")
 
 # Separator --------------------------------------------
 

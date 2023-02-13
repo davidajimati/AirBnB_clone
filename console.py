@@ -311,6 +311,98 @@ class HBNBCommand(cmd.Cmd):
         """Prints Amenity instances count """
         print(self.grand_parser(args, "Amenity"))
 
+# ------------------------SHOW PARSER ------------------------------
+
+    def show_parser(self, string, cls_name):
+        '''Parses command and returns list'''
+        res = (string.split('.'))
+        return (self.iid_printer(cls_name, res[1], res[2]))
+
+# ------------------------SHOW SEALED ------------------------------
+
+    def parse_id(self, string, cls_name):
+        '''Parses command and returns list'''
+        real = []
+
+        pre = string.split('.')
+        real.append(pre[0])
+
+        pre2 = pre[1].split('("')
+        real.append(pre2[0])
+
+        pre3 = pre2[1].split('")')
+        real.append(pre3[0])
+        return (self.iid_printer(cls_name, real[1], real[2]))
+
+# -------------------- PARSE_ID SEALED ------------------------------
+
+    def iid_printer(self, cls_name, command, iid):
+        """Handles the search and returns a list"""
+
+        if command == "show":
+            key = "{}.{}".format(cls_name, iid)
+            objects = storage.all()
+            for obj, val in objects.items():
+                if obj == key:
+                    return (val)
+            return ("** no instance found **")
+
+        elif command == "destroy":
+            self.destroy_engine(cls_name, iid)
+
+# Separator ---------------------------------------------
+
+# Separator --------------------------------------------
+
+    def do_User(self, args):
+        """
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
+        """
+        print(self.grand_parser(args, "User"))
+
+    def do_State(self, args):
+        """
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
+        """
+        print(self.grand_parser(args, 'State'))
+
+    def do_Review(self, args):
+        """
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
+        """
+        print(self.grand_parser(args, "Review"))
+
+    def do_Place(self, args):
+        """
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
+        """
+        print(self.grand_parser(args, "Place"))
+
+    def do_City(self, args):
+        """
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
+        """
+        print(self.grand_parser(args, "City"))
+
+    def do_BaseModel(self, args):
+        """
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
+        """
+        print(self.grand_parser(args, "BaseModel"))
+
+    def do_Amenity(self, args):
+        """
+        retrieve an instance based on its ID:
+        <class name>.show(<id>)
+        """
+        print(self.grand_parser(args, "Amenity"))
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

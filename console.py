@@ -200,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
         """Delegates the parsing to the right algorithm"""
 
         if str[-2:] == '")':
-            return (self.parse_id(str, cls_name))
+            return(self.parse_id(str, cls_name))
         elif str[-6:] == 'show()':
             return (self.show_parser(str, cls_name))
         elif str[-6:] == '.all()':
@@ -349,7 +349,7 @@ class HBNBCommand(cmd.Cmd):
             return ("** no instance found **")
 
         elif command == "destroy":
-            self.destroy_engine(cls_name, command, iid)
+            ret = self.call_destroy(f"{cls_name} {iid}")
 
 # Separator ---------------------------------------------
 
@@ -405,6 +405,8 @@ class HBNBCommand(cmd.Cmd):
         print(self.grand_parser(args, "Amenity"))
 
 # Separator--------------- DESTROY CITY BELOW --------------
+    def call_destroy(self, str):
+        ret = self.do_destroy(str)
 
 # -------------------- PARSE_ID SEALED ------------------------------
 

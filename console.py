@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         """An entered empty line doesn't execute anything"""
-        print("", end="")
+        pass
 
     def do_create(self, args):
         '''Creates a new class instance, taking commands from the CLI'''

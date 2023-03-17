@@ -1,14 +1,11 @@
 footer {
-    display: flex;
-    background-color: white;
-    color: black;
-    height: 60px;
-    width: 100%;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    z-index: 999;
-    border-top: 1px solid #cccccc;
+	height: 60px;
+	width: 100%;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	bottom: 0;
+	background: white;
+	border-top: 1px solid #CCCCCC;
 }

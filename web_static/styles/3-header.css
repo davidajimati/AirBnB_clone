@@ -1,20 +1,16 @@
 header {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: white;
-    width: 100%;
     height: 70px;
-    position: fixed;
-    border-bottom: 1px solid #CCCCCC;
-    top: 0;
-    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    background: #fff url("../images/logo&text.png") 20px no-repeat;
 }
 
-.logo {
-    width: 142px;
+header .logo {
     height: 60px;
+    width: 142px;
     background-image: url(../images/logo.png);
     background-repeat: no-repeat;
     background-size: contain;
     margin-left: 20px;
+    align-self: center;
 }

@@ -44,3 +44,28 @@ section.filters h4 {
     padding: 0;
     margin: 0 auto 17.5px 20px;
 }
+
+.dropdown {
+	display: none;
+}
+
+.locations:hover .dropdown, .amenities:hover .dropdown {
+	position: absolute;
+	display: block;
+	background-color: #FAFAFA;
+	width: 19.5%;
+	border: #DDDDDD 1px solid;
+	border-radius: 4px;
+}
+
+
+.dropdown .popover {
+	list-style: none;
+}
+
+.dropdown .popover h2 {
+	font-size: 16px;
+}
+.dropdown .popover li {
+	list-style: none;
+}

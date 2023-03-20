@@ -45,27 +45,27 @@ section.filters h4 {
     margin: 0 auto 17.5px 20px;
 }
 
-.dropdown {
+.popover {
 	display: none;
 }
 
-.locations:hover .dropdown, .amenities:hover .dropdown {
+.locations:hover .popover, .amenities:hover .popover {
 	position: absolute;
 	display: block;
 	background-color: #FAFAFA;
 	width: 19.5%;
 	border: #DDDDDD 1px solid;
 	border-radius: 4px;
+	padding-left: 10px;
 }
 
-
-.dropdown .popover {
+.popover ul {
 	list-style: none;
 }
 
-.dropdown .popover h2 {
+.popover h2 {
 	font-size: 16px;
 }
-.dropdown .popover li {
+.popover li {
 	list-style: none;
 }

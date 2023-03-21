@@ -90,29 +90,29 @@ article .top_two {
 }
 
 /* -------------------------------- */
-.amenities,
-.reviews {
-    margin-top: 40px;
-    display: block;
-}
-
-.top_four .amenities h2,
-.top_five .reviews h2 {
-    font-size: 16px;
-	border-bottom: 1px solid #ddd;
-	text-align: left;
-}
-
 .top_four {
-    display: flex;
+    display:flex;
 }
-.top_four .amenities ul {
+
+.top_four .amenities, .reviews {
+    margin-top: 40px;
+}
+
+.top_four .amenities div {
+	border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.top_four .amenities div h2 {
+    font-size: 16px;
+}
+
+.top_four .amenities ul{
     list-style: none;
     margin: 0;
     padding: 0;
     width: 150%;
 }
-
 
 .tv, .wifi, .pet {
     background-position: left;
@@ -132,4 +132,29 @@ article .top_two {
 
 .top_four .amenities .pet {
     background-image: url('../images/icon_pets.png');
+}
+ /* --------- */
+.top_five .reviews div {
+	border-bottom: 1px solid #ddd;
+}
+
+.top_five  .reviews div h2 {
+    font-size: 16px;
+}
+
+.top_five .reviews ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.top_five .reviews ul li {
+    padding-bottom: 5px;
+}
+
+.top_five .reviews ul h3 {
+    font-size: 14px;
+}
+
+.top_five  .reviews ul p {
+    font-size: 12px;
 }
